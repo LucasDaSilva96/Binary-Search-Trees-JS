@@ -152,7 +152,6 @@ export class TREE {
     let current = this.root;
     while (current) {
       if (current.data === nodeValue) {
-        console.log(current);
         return current;
       }
       if (current.data > nodeValue) {
@@ -251,5 +250,18 @@ export class TREE {
     }
     traverse(this.root);
     return result;
+  }
+
+  // Height function
+  height(node = this.root) {
+    if (!node) {
+      return -1; // Height of an empty tree is -1
+    }
+
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+
+    // Return the height of the current node by adding 1 to the maximum of left and right subtree heights
+    return Math.max(leftHeight, rightHeight) + 1;
   }
 }
