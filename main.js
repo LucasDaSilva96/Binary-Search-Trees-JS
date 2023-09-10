@@ -27,7 +27,7 @@ prettyPrint(myTree.root);
 console.log("******************");
 myTree.delete(3);
 prettyPrint(myTree.root);
-myTree.find(6);
+console.log(myTree.find(6));
 
 // Using levelOrder to print values
 console.log("LevelOrder:", myTree.levelOrder());
@@ -39,5 +39,9 @@ console.log("In-order:", myTree.inOrder());
 console.log("Pre-order:", myTree.preOrder());
 
 // Post-order traversal
-
 console.log("Post-order:", myTree.postOrder());
+
+// Find and print the height of the root node
+console.log("Height of root:", myTree.height(myTree.root));
+// Find and print the height of a specific node
+console.log("Height of node with value 2:", myTree.height(myTree.find(2).data));
