@@ -164,4 +164,92 @@ export class TREE {
     console.log("No match");
     return false; // If no match
   }
+
+  // LevelOrder function which accepts another function as a parameter
+  levelOrder(callback = null) {
+    if (!this.root) {
+      return []; // Empty list
+    }
+
+    const result = [];
+    const queue = [this.root];
+
+    while (queue.length > 0) {
+      const currentNode = queue.shift();
+
+      // Execute the provided callback function on the current node
+      if (callback) {
+        callback(currentNode);
+      } else {
+        result.push(currentNode.data);
+      }
+
+      // Enqueue child nodes for the next level
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+    }
+    return result;
+  }
+
+  // inOrder function
+  inOrder(callback = null) {
+    const result = [];
+
+    function traverse(node) {
+      if (node) {
+        traverse(node.left);
+        if (callback) {
+          callback(node);
+        } else {
+          result.push(node.data);
+        }
+        traverse(node.right);
+      }
+    }
+    traverse(this.root);
+    return result;
+  }
+
+  // preOrder function
+  preOrder(callback = null) {
+    const result = [];
+
+    function traverse(node) {
+      if (node) {
+        if (callback) {
+          callback(node);
+        } else {
+          result.push(node.data);
+        }
+        traverse(node.left);
+        traverse(node.right);
+      }
+    }
+    traverse(this.root);
+    return result;
+  }
+
+  // postOrder function
+  postOrder(callback = null) {
+    const result = [];
+
+    function traverse(node) {
+      if (node) {
+        traverse(node.left);
+        traverse(node.right);
+        if (callback) {
+          callback(node);
+        } else {
+          result.push(node.data);
+        }
+      }
+    }
+    traverse(this.root);
+    return result;
+  }
 }
