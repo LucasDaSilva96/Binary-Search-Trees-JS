@@ -43,4 +43,37 @@ export class TREE {
     }
     return ROOT; // Return the level-0 root node
   }
+
+  // insert function which accepts a value to insert in the tree
+  insert(value) {
+    // If the tree is empty, create a new root node
+    if (!this.root) {
+      this.root = new NODE(value);
+      return;
+    }
+
+    this.#insertRecursively(this.root, value);
+  }
+  // This function is in charge of the insert-process
+  #insertRecursively(node, value) {
+    if (value < node.data) {
+      // Insert into the left subtree
+      if (node.left === null) {
+        // If there's no left child, create a new node
+        node.left = new NODE(value);
+      } else {
+        // Recursively insert into the left subtree
+        this.#insertRecursively(node.left, value);
+      }
+    } else if (value > node.data) {
+      // Insert into the right subtree
+      if (node.right === null) {
+        // If there's no right child, create a new node
+        node.right = new NODE(value);
+      } else {
+        this.#insertRecursively(node.right, value);
+      }
+    }
+    // If the value is equal to the current node's data, ignore duplicates (do nothing).
+  }
 }
