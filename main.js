@@ -49,3 +49,5 @@ console.log("Is the tree balanced?", myTree.isBalanced());
 // Make the tree unbalanced by adding more nodes to the left subtree
 myTree.root.left.left.left = new NODE(8);
 console.log("Is the tree balanced?", myTree.isBalanced()); // Should print false
+myTree.reBalance();
+console.log("Is the tree balanced?", myTree.isBalanced()); // Should print true

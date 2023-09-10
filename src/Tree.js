@@ -342,4 +342,30 @@ export class TREE {
 
     return Math.max(leftHeight, rightHeight) + 1; // Return the height of this node's subtree
   }
+
+  reBalance() {
+    // Extract all nodes into a sorted array using in-order traversal
+    const nodesArray = this.inOrder();
+
+    // New balanced binary search tree from the sorted array
+    this.root = this.#buildTreeFromSortedArray(nodesArray);
+  }
+
+  #buildTreeFromSortedArray(sortedArray) {
+    return this.#buildTreeRecursive(sortedArray, 0, sortedArray.length - 1);
+  }
+
+  #buildTreeRecursive(sortedArray, start, end) {
+    if (start > end) {
+      return null;
+    }
+
+    const mid = Math.floor((start + end) / 2);
+    const newNode = new NODE(sortedArray[mid]);
+
+    newNode.left = this.#buildTreeRecursive(sortedArray, start, mid - 1);
+    newNode.right = this.#buildTreeRecursive(sortedArray, mid + 1, end);
+
+    return newNode;
+  }
 }
