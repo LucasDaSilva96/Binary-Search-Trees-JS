@@ -314,4 +314,32 @@ export class TREE {
       }
     }
   }
+
+  // isBalanced function
+  isBalanced(node) {
+    return this.checkBalance(this.root) !== -1;
+  }
+
+  checkBalance(node) {
+    if (!node) {
+      return 0; // Height of an empty tree is 0
+    }
+    const leftHeight = this.checkBalance(node.left);
+    if (leftHeight === -1) {
+      return -1; // Left subtree is unbalanced, return -1
+    }
+
+    const rightHeight = this.checkBalance(node.right);
+    if (rightHeight === -1) {
+      return -1; // Right subtree is unbalanced, return -1
+    }
+
+    const heightDiff = Math.abs(leftHeight - rightHeight);
+
+    if (heightDiff > 1) {
+      return -1; // This node is unbalanced, return -1
+    }
+
+    return Math.max(leftHeight, rightHeight) + 1; // Return the height of this node's subtree
+  }
 }
