@@ -76,4 +76,72 @@ export class TREE {
     }
     // If the value is equal to the current node's data, ignore duplicates (do nothing).
   }
+
+  // delete function which accepts a value to delete in the tree
+  delete(value) {
+    if (!value || !this.root) {
+      return false; // Tree is empty, nothing to delete
+    }
+
+    // Helper function to find the node to delete
+    const findNodeToDelete = (node, parent) => {
+      if (!node) {
+        return { node: null, parent }; // Value not found, return null
+      }
+
+      if (value < node.data) {
+        return findNodeToDelete(node.left, node);
+      } else if (value > node.data) {
+        return findNodeToDelete(node.right, node);
+      }
+
+      // Remove the "else if" condition for equality
+      return { node, parent };
+    };
+
+    const { node: nodeToDelete, parent: parentOfNodeToDelete } =
+      findNodeToDelete(this.root, null);
+    if (!nodeToDelete) {
+      return false; // Value not found in the tree
+    }
+
+    // Case 1: Node to delete has no children
+    if (!nodeToDelete.left && !nodeToDelete.right) {
+      if (!parentOfNodeToDelete) {
+        // The root node is being deleted
+        this.root = null;
+      } else if (parentOfNodeToDelete.left === nodeToDelete) {
+        parentOfNodeToDelete.left = null;
+      } else {
+        parentOfNodeToDelete.right = null;
+      }
+      // Case 2: Node to delete has one child
+    } else if (!nodeToDelete.left || !nodeToDelete.right) {
+      console.log("Node to delete:", nodeToDelete);
+      console.log("Parent of node to delete:", parentOfNodeToDelete);
+      const childNode = nodeToDelete.left || nodeToDelete.right;
+      if (!parentOfNodeToDelete) {
+        // The root node is being deleted
+        this.root = childNode;
+      } else if (parentOfNodeToDelete.left === nodeToDelete) {
+        parentOfNodeToDelete.left = childNode;
+      } else {
+        parentOfNodeToDelete.right = childNode;
+      }
+      // Case 3: Node to delete has two children
+    } else {
+      const successor = this.#findMin(nodeToDelete.right);
+      const successorValue = successor.data;
+      this.delete(successorValue); // Recursively delete the successor node
+      nodeToDelete.data = successorValue;
+    }
+
+    return true; // Node with the value has been deleted
+  }
+  #findMin(node) {
+    while (node.left) {
+      node = node.left;
+    }
+    return node;
+  }
 }
