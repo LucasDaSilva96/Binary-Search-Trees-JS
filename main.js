@@ -15,7 +15,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 // Create a binary search tree from an array of random numbers < 100
-function createRandomBinaryNr() {
+function createRandomBinaryNodeNr() {
   const tree = new TREE();
   const arrayOfRandomNr = [];
 
@@ -41,7 +41,7 @@ function getRadomNr() {
 }
 
 // Usage example TREE CLASS:
-const myTree = createRandomBinaryNr();
+const myTree = createRandomBinaryNodeNr();
 
 prettyPrint(myTree.root);
 
