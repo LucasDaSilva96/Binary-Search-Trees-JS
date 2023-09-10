@@ -1,4 +1,3 @@
-import { NODE } from "./src/Node.js";
 import { TREE } from "./src/Tree.js";
 
 // visualize binary search tree function
@@ -16,7 +15,16 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 // Usage example:
-const valuesArray = [3, 2, 1, 2, 4, 3, 5, 6, 4, 7, 6];
-const myTree = new TREE(valuesArray);
+const myTree = new TREE();
+myTree.insert(4);
+myTree.insert(2);
+myTree.insert(6);
+myTree.insert(1);
+myTree.insert(3);
+myTree.insert(5);
+myTree.insert(7);
 
+prettyPrint(myTree.root);
+console.log("******************");
+myTree.delete(3);
 prettyPrint(myTree.root);
