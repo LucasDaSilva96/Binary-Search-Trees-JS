@@ -1,5 +1,4 @@
 import { TREE } from "./src/Tree.js";
-
 // visualize binary search tree function
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -14,7 +13,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-// Usage example:
+// Usage example TREE CLASS:
 const myTree = new TREE();
 myTree.insert(4);
 myTree.insert(2);
@@ -29,3 +28,16 @@ console.log("******************");
 myTree.delete(3);
 prettyPrint(myTree.root);
 myTree.find(6);
+
+// Using levelOrder to print values
+console.log("LevelOrder:", myTree.levelOrder());
+
+// In-order traversal
+console.log("In-order:", myTree.inOrder());
+
+// Pre-order traversal
+console.log("Pre-order:", myTree.preOrder());
+
+// Post-order traversal
+
+console.log("Post-order:", myTree.postOrder());
