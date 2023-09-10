@@ -264,4 +264,54 @@ export class TREE {
     // Return the height of the current node by adding 1 to the maximum of left and right subtree heights
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  // Depth function
+  depth(node) {
+    if (!node) {
+      return -1; // Depth of an empty node is -1
+    }
+
+    let depthCount = 0;
+    while (node !== this.root) {
+      node = this.getParent(node);
+      depthCount++;
+    }
+
+    return depthCount;
+  }
+
+  getParent(node) {
+    // Helper function to get the parent node of a given node
+    if (!this.root || !node) {
+      return null;
+    }
+
+    let parent = null;
+    findParent(this.root, node);
+
+    return parent;
+
+    function findParent(current, target) {
+      if (current === target) {
+        return;
+      }
+
+      if (current.left && current.left === target) {
+        parent = current;
+        return;
+      }
+      if (current.right && current.right === target) {
+        parent = current;
+        return;
+      }
+
+      if (current.left) {
+        this.findParent(current.left, target);
+      }
+
+      if (current.right) {
+        this.findParent(current.right, target);
+      }
+    }
+  }
 }

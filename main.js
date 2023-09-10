@@ -45,3 +45,6 @@ console.log("Post-order:", myTree.postOrder());
 console.log("Height of root:", myTree.height(myTree.root));
 // Find and print the height of a specific node
 console.log("Height of node with value 2:", myTree.height(myTree.find(2).data));
+// Find and print the depth of a specific node, e.g., node with value 2
+const nodeWithValue2 = myTree.find(2);
+console.log("Depth of node with value 2:", myTree.depth(nodeWithValue2));
