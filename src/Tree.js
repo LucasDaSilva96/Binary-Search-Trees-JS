@@ -1,5 +1,5 @@
 import { NODE } from "./Node.js";
-class TREE {
+export class TREE {
   constructor(values) {
     this.root = this.buildTree(values);
   }
