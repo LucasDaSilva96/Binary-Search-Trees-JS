@@ -144,4 +144,24 @@ export class TREE {
     }
     return node;
   }
+  // find function which accepts a value and returns the node with the given value.
+  find(nodeValue) {
+    if (!this.root) {
+      return false; //Empty list
+    }
+    let current = this.root;
+    while (current) {
+      if (current.data === nodeValue) {
+        console.log(current);
+        return current;
+      }
+      if (current.data > nodeValue) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    console.log("No match");
+    return false; // If no match
+  }
 }
