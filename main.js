@@ -28,3 +28,4 @@ prettyPrint(myTree.root);
 console.log("******************");
 myTree.delete(3);
 prettyPrint(myTree.root);
+myTree.find(6);
