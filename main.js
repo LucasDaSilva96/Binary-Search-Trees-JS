@@ -14,21 +14,37 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
+// Create a binary search tree from an array of random numbers < 100
+function createRandomBinaryNr() {
+  const tree = new TREE();
+  const arrayOfRandomNr = [];
+
+  for (let i = 0; i < 10; i++) {
+    arrayOfRandomNr[i] = getRadomNr();
+  }
+  arrayOfRandomNr.sort((a, b) => {
+    return a - b;
+  });
+  const uniqueArrayOfRadomNr = [...new Set(arrayOfRandomNr)];
+
+  for (let i = 0; i < uniqueArrayOfRadomNr.length; i++) {
+    tree.insert(uniqueArrayOfRadomNr[i]);
+  }
+
+  tree.reBalance();
+  return tree;
+}
+
+// Get random numbers < 100
+function getRadomNr() {
+  return Math.floor(Math.random() * 100);
+}
+
 // Usage example TREE CLASS:
-const myTree = new TREE();
-myTree.insert(4);
-myTree.insert(2);
-myTree.insert(6);
-myTree.insert(1);
-myTree.insert(3);
-myTree.insert(5);
-myTree.insert(7);
+const myTree = createRandomBinaryNr();
 
 prettyPrint(myTree.root);
-console.log("******************");
-myTree.delete(3);
-prettyPrint(myTree.root);
-console.log(myTree.find(6));
+
 // Using levelOrder to print values
 console.log("LevelOrder:", myTree.levelOrder());
 // In-order traversal
@@ -41,13 +57,8 @@ console.log("Post-order:", myTree.postOrder());
 console.log("Height of root:", myTree.height(myTree.root));
 // Find and print the height of a specific node
 console.log("Height of node with value 2:", myTree.height(myTree.find(2).data));
-// Find and print the depth of a specific node, e.g., node with value 2
-const nodeWithValue2 = myTree.find(2);
+// Find and print the depth of a specific node, return - 1 if node not found
+const nodeWithValue2 = myTree.find(32);
 console.log("Depth of node with value 2:", myTree.depth(nodeWithValue2));
 // Should print true
 console.log("Is the tree balanced?", myTree.isBalanced());
-// Make the tree unbalanced by adding more nodes to the left subtree
-myTree.root.left.left.left = new NODE(8);
-console.log("Is the tree balanced?", myTree.isBalanced()); // Should print false
-myTree.reBalance();
-console.log("Is the tree balanced?", myTree.isBalanced()); // Should print true
